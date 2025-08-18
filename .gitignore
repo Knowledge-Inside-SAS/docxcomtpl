@@ -1,0 +1,5 @@
+.idea
+venv
+__pycache__
+src/pymsword.egg-info
+examples/*result.docx
