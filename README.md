@@ -91,7 +91,7 @@ Post-processing function must take single argument which is the Word.Document ob
 
 ## Installation
 
-You can install Pymsword using pip:
+You can install `docxcomtpl` using pip:
 
 ```bash
 pip install docxcomtpl

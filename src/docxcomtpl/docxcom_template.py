@@ -23,23 +23,24 @@ class DocxComTemplate:
             self.insert_counter += 1
             return self.PLACEHODER_TEMPLATE.format(self.insert_counter)
 
-        def walk_data(data): #type: (Dict[str, Any])->Dict[str, Any]
-            prepared = {}
-            for key, value in data.items():
-                ukey = str(key)
-                if isinstance(value, list):
-                    mapped_value = [walk_data(item) for item in value]
-                elif isinstance(value, (str, RichText, RichTextParagraph, InlineImage)):
-                    mapped_value = value
-                elif callable(value):
-                    #store the inserter
-                    placeholder = new_placeholder()
-                    placeholder2inserter[placeholder] = value
-                    mapped_value = placeholder
-                else:
-                    mapped_value = str(value)
-                prepared[ukey] = mapped_value
-            return prepared
+        def walk_data(data): #type: (Any)->Any
+            if isinstance(data, (str, RichText, RichTextParagraph, InlineImage)):
+                return data
+
+            elif callable(data):
+                # store the inserter
+                placeholder = new_placeholder()
+                placeholder2inserter[placeholder] = data
+                return placeholder
+            elif isinstance(data, list):
+                return [walk_data(item) for item in data]
+            elif isinstance(data, dict):
+                prepared = {}
+                for key, value in data.items():
+                    prepared[key] = walk_data(value)
+                return prepared
+            else:
+                return data
         return walk_data(data), placeholder2inserter
 
     def generate(self, data:Dict[str, Any], output:str, postprocess=None, jinja_env=None):
