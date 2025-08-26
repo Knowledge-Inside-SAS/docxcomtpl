@@ -45,7 +45,7 @@ def _insert_document_inline(word_range, filename:str, set_style=None):
 
     return word_range
 
-def _insert_picture_inline(insert_range, filename):
+def _insert_picture_inline(insert_range, filename, **kwargs):
     """Inserts picture from file <filename> into specified range of document.
     After operation, range points after the inserted picture.
     Function returns a new Word.InlineShape object."""
