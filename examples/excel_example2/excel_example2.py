@@ -108,14 +108,13 @@ def main():
         excel_data = parse_excel_data(excel_path)
         func['tabrow'] = excel_data['hier']
         func['history'] = excel_data['history']
-        func[ 'history1' ] = ["asd", "bbb", "ccc"]
         description_file = os.path.join(source_dir, funcname + ".rtf")
         if os.path.exists(description_file):
             func['description'] = document_inserter(description_file, set_style="Normal")
 
         diagram_file = os.path.join(source_dir, funcname + ".svg")
         if os.path.exists(diagram_file):
-            func['diagram'] = image_inserter(diagram_file)
+            func['diagram'] = image_inserter(diagram_file, max_height=380)
 
 
     template.generate(data, "LAPTOP functional specification result.docx",
