@@ -1,5 +1,8 @@
 .idea
 venv
 __pycache__
-src/pymsword.egg-info
+src/docxcomtpl.egg-info
+dist
 examples/*result.docx
+examples/excel_example1/quarterly sales report.docx
+examples/excel_example2/LAPTOP functional specification result.docx
